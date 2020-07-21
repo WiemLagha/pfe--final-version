@@ -1,0 +1,73 @@
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <h3> Listes de contacts </h3>
+                <div *ngIf="contactsLists.length>0; then Lists else noLists"></div>
+                <ng-template #Lists>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom de la liste</th>
+                                <th>Date d'ajout</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let list of contactsLists; let i = index">
+                                <td>{{ i+1 }}</td>
+                                <td>{{ list.name }}</td>
+                                <td>{{ list.dateAjout| date: 'dd/MM/yyyy'}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-success btn-circle"> <i class="fa fa-eye"></i></button>&nbsp;
+                                    <button type="button" class="btn btn-danger btn-circle" (click)="deleteList(list._id,indice)"><i class="fa fa-times"></i> </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </ng-template>
+                <ng-template #noLists>
+                    <div class="alert alert-warning">Aucune liste trouvée</div>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ajouter une liste de contacts</h4>
+                <form [formGroup]="newListForm" (ngSubmit)="addList()">
+                    <div class="container my-3">
+
+                        <div class="col-md-12">
+                            <label for="name">Nom de la liste</label>
+                            <input type="text" name="name" id="name" class="form-control" formControlName="name">&nbsp;
+                            <!--begin volidator Name-->
+                            <div class="text-danger" *ngIf="name.touched">
+                                <div *ngIf="name.errors?.required">
+                                    Champ obligatoire
+                                </div>
+                            </div>
+                            <!--end volidator Name-->
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="listeContacts">Liste de contacts</label>
+                            <br />
+                            <input type="file" name="listeContacts" id="listeContacts"
+                                (change)="fileChangeListener($event)" accept=".csv" />&nbsp;
+                            <br />
+                        </div>
+
+                    </div>
+
+                    <button value="save" class="btn btn-rounded btn-block btn-outline-info col-md-6"
+                        [disabled]="newListForm.invalid">Ajouter une liste</button>
+                    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

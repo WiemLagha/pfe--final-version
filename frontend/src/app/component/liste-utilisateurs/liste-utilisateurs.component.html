@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ajouter un utilisateur</h4>
+                <div class="col-lg-3 col-md-3">
+                    <button type="button" class="btn btn-rounded btn-block btn-outline-info" [routerLink]="['/component/ajouterUtilisateur']">Ajouter un utilisateur</button>
+                </div>
+                <br/>
+                <h3> Utilisateurs </h3>
+                <div *ngIf="usersList.length>0; then userslist else noUsers"></div>
+                <ng-template #userslist>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom de l'utilisateur</th>
+                                <th>Login</th>
+                                <th>Dernière modification</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let user of usersList; let i = index">
+                                    <td>{{ i+1 }}</td>
+                                    <td>{{ user.name }}</td>
+                                    <td>{{ user.login}}</td>
+                                    <td>{{ user.dernierModif| date: 'dd/MM/yyyy'}}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning btn-circle"> <i class="fas fa-edit"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-danger btn-circle" (click)="deleteUser(user._id,indice)"><i class="fa fa-times"></i> </button>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+                </ng-template>
+                <ng-template #noUsers>
+                    <div class="alert alert-warning">Aucun utilisateur trouvée</div>
+                </ng-template>
+
+
+            </div>
+        </div>
+    </div>
+</div>

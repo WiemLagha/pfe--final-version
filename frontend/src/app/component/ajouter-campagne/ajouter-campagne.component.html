@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-head"> </div>
+    <div class="card-body">
+        <form [formGroup]="newCampaignForm" (ngSubmit)="transferData()">
+            <div class="container my-3">
+
+                <div class="col-md-6">
+                    <label for="campaignName">Nom campagne</label>
+                    <input type="text" name="campaignName" id="campaignName" class="form-control"
+                        formControlName="campaignName">
+                    <!--begin volidator campaignName-->
+                    <div class="text-danger" *ngIf="campaignName.touched">
+                        <div *ngIf="campaignName.errors?.required">
+                            Champ obligatoire
+                        </div>
+                    </div>
+                    <!--end volidator campaignName-->
+                </div>
+                <div class="col-md-6">
+                    <label for="subject">Sujet</label>
+                    <input type="text" name="subject" id="subject" class="form-control" formControlName="subject">
+
+                    <!--begin validators subject-->
+                    <div class="text-danger" *ngIf="subject.touched">
+                        <div *ngIf="subject.errors?.required">
+                            Champ obligatoire
+                        </div>
+                    </div>
+                    <!--end validators subject-->
+                </div>
+                <div class="col-md-6">
+                    <label for="name">Nom de l'émtteur </label>
+                    <input type="text" name="name" id="name" class="form-control" formControlName="name">
+                    <!--begin validators name-->
+                    <div class="text-danger" *ngIf="name.touched">
+                        <div *ngIf="name.errors?.required">
+                            Champ obligatoire
+                        </div>
+                    </div>
+
+                    <!--end validators firstname-->
+                </div>
+
+                <div class="col-md-6">
+                    <label for="email">Emetteur </label>
+                    <input type="email" name="email" id="email" class="form-control" formControlName="email">
+                    <!--begin validators email-->
+                    <div class="text-danger" *ngIf="email.touched && email.invalid">
+                        <div *ngIf="email.errors?.required">
+                            Champ obligatoire
+                        </div>
+                        <div *ngIf="email.errors?.email">
+                            format invalide
+                        </div>
+                    </div>
+                    <!--end validators email-->
+                </div>
+
+                <div class="col-md-6">
+                    <label for="listeContact">Liste de contacts </label>
+                    <select class="custom-select " id="listeContacts" name="listeContacts"
+                        formControlName="listeContacts" (change)="change($event)">
+                        <option *ngFor="let list of contactsLists; let i = index" [ngValue]="list._id"> {{list.name}}
+                        </option>
+                    </select>
+
+                </div>
+                <br />
+                <div>
+                    <p> Pour continuer la création de votre campagne veuillez créer le contenu de votre email </p>
+                </div>
+                <button value="add" class="btn btn-primary my-3" [disabled]="newCampaignForm.invalid" >Créer votre
+                    email
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

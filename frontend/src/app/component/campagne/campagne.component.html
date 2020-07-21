@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Créer une nouvelle campagne</h4>
+                <div class="col-lg-3 col-md-3">
+                    <button type="button" class="btn btn-rounded btn-block btn-outline-info" [routerLink]="['/component/ajouterCampagne']">Créer une campagne</button>
+                </div>
+                <br/>
+                <h3> Campagnes </h3>
+                <div *ngIf="campagneList.length>0; then campagnelist else NoCampagne"></div>
+                <ng-template #campagnelist>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom de la campagne</th>
+                                <th>Envoyée par</th>
+                                <th>Date d'envoi</th>
+                                <th>Adresse email de l'émetteur</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <tr *ngFor="let campaign of campagneList; let i = index">
+                                    <td>{{ i+1 }}</td>
+                                    <td>{{ campaign.campaignName }}</td>
+                                    <td>{{ campaign.name }}</td>
+                                    <td>{{ campaign.dateEnvoi}}</td>
+                                    <td>{{ campaign.email }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger btn-circle" (click)="delete(campaign._id,indice)"><i class="fa fa-times"></i> </button>
+                                    </td>
+                                </tr>
+                            
+                        </tbody>
+                    </table>
+                    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+                </ng-template>
+                <ng-template #NoCampagne>
+                    <div class="alert alert-warning">Aucune campagne trouvée</div>
+                </ng-template>
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+
+    <div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <button value="register" class="btn btn-block btn-info" (click)="saveCampaign()">Sauvegarder campagne</button>
+            </div>
+            <div class="col-md-2">
+                <button value="register" class="btn btn-block btn-info">Envoyer campagne</button>
+            </div>
+        </div>
+
+        <p> </p>
+        <email-editor (loaded)="editorLoaded()"></email-editor>
+    </div>
+
+    <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+
+
+</div>

@@ -1,0 +1,43 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <h2 class="active"> Sign In </h2>
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="./../../../assets/images/logo.png" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form [formGroup]="loginForm" (ngSubmit)="Login()">
+            <div>
+                <input type="text" id="login" class="fadeIn second" name="login" placeholder="Login"
+                    class="form-control" formControlName="login">
+                <!--begin login validator -->
+                <div class="text-danger" *ngIf="login.touched && login.invalid">
+                    <div *ngIf="login.errors.required">
+                        Champ obligatoire
+                    </div>
+                    <div *ngIf="login.errors?.email">
+                        format invalide
+                    </div>
+                </div>
+                <!-- end login validator-->
+            </div>
+
+            <div>
+                <input type="password" id="password" class="fadeIn third" name="password" placeholder="Mot de passe"
+                    class="form-control" formControlName="password">
+                <!--begin validators password-->
+                <div class="text-danger" *ngIf="password.touched">
+                    <div *ngIf="password.errors?.required">
+                        Champ obligatoire
+                    </div>
+                </div>
+                <!--end validators password-->
+            </div>
+            <button value="login" class="fadeIn fourth" [disabled]="loginForm.invalid" >Se connecter</button>
+        </form>
+
+    </div>
+</div>

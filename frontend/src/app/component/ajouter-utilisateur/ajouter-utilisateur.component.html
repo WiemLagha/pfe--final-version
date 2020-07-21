@@ -1,0 +1,54 @@
+<div class="card">
+    <div class="card-head"> </div>
+    <div class="card-body">
+        <div class="container">
+        <form [formGroup]="newUserForm" (ngSubmit)="addUser()">
+            <div class="container my-3">
+
+                <div class="col-md-6">
+                    <label for="name">Nom utilisateur</label>
+                    <input type="text" name="name" id="name" class="form-control" formControlName="name">
+                    <!--begin volidator Name-->
+                    <div class="text-danger" *ngIf="name.touched">
+                        <div *ngIf="name.errors?.required">
+                            Champ obligatoire
+                        </div>
+                    </div>
+                    <!--end volidator Name-->
+                </div>
+                <div class="col-md-6">
+                    <label for="login">Login</label>
+                    <input type="text" name="login" id="login" class="form-control" formControlName="login">
+                    <!--begin validators login-->
+                    <div class="text-danger" *ngIf="login.touched&& login.invalid">
+                        <div *ngIf="login.errors?.required">
+                            Champ obligatoire
+                        </div>
+                        <div *ngIf="login.errors?.invalid">
+                            Format invalide
+                        </div>
+                    </div>
+                    <!--end validators login-->
+                </div>
+                <div class="col-md-6">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" name="password" id="password" class="form-control" formControlName="password">
+                    <!--begin validators password-->
+                    <div class="text-danger" *ngIf="password.touched">
+                        <div *ngIf="password.errors?.required">
+                            Champ obligatoire
+                        </div>
+                    </div>
+
+                    <!--end validators password-->
+                </div>
+
+
+            </div>
+
+            <button value="register" class="btn btn-rounded btn-block btn-outline-info col-md-2" [disabled]="newUserForm.invalid"> Submit</button>
+            <app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+        </form>
+    </div>
+</div>
+</div>
